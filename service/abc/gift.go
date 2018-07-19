@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"bank.explorer/tools/https"
+	"bank.explorer/util/https"
 )
 
 const GiftListURL = "https://enjoy.abchina.com/yh-web/rights/list"

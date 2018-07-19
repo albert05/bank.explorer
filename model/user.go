@@ -2,7 +2,7 @@ package model
 
 import (
 	"fmt"
-	"bank.explorer/tools/mysql"
+	"bank.explorer/util/mysql"
 )
 
 const UserTable = "userinfos"
