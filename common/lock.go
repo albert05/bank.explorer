@@ -3,7 +3,7 @@ package common
 import (
 	"fmt"
 	"os"
-	"kd.explorer/config"
+	"bank.explorer/config"
 	"path"
 )
 
