@@ -4,7 +4,6 @@ import (
 	"gopkg.in/gomail.v2"
 	"bank.explorer/config"
 	"strconv"
-	"log"
 )
 
 func Send(receivers []string, subject, content string) bool {
@@ -19,7 +18,7 @@ func Send(receivers []string, subject, content string) bool {
 	d := gomail.NewPlainDialer(config.MailConfig["host"], port, config.MailConfig["username"], config.MailConfig["password"])
 
 	if err := d.DialAndSend(mail); err != nil {
-		log.Fatal(err)
+		panic(err)
 		return false
 	}
 
@@ -39,7 +38,7 @@ func SendSingle(receiver string, subject, content string) bool {
 	d := gomail.NewPlainDialer(config.MailConfig["host"], port, config.MailConfig["username"], config.MailConfig["password"])
 
 	if err := d.DialAndSend(mail); err != nil {
-		log.Fatal(err)
+		panic(err)
 		return false
 	}
 

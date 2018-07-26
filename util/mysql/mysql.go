@@ -3,7 +3,6 @@ package mysql
 import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
-	"log"
 	"bank.explorer/config"
 	"strings"
 	"unsafe"
@@ -37,7 +36,7 @@ func GetInstance() Mysql {
 
 	db, err := sql.Open(DriverNAME, DSN)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 		return Mysql{}
 	}
 

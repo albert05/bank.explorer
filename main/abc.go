@@ -6,21 +6,22 @@ package main
 
 import (
 	"fmt"
-	"flag"
 	"bank.explorer/common"
 	"log"
 	"bank.explorer/util/dates"
 	"bank.explorer/service/abc"
 	"bank.explorer/model"
 	"strconv"
+	"bank.explorer/config"
+	"bank.explorer/exception"
+	"bank.explorer/service"
 )
 
 func main() {
-	var ids string
-	flag.StringVar(&ids, "l", "", "job")
-	flag.Parse()
+	service.ConfigInit()
+	defer exception.Handle(true)
 
-	id ,_ := strconv.Atoi(ids)
+	id ,_ := strconv.Atoi(config.JobList)
 	job := model.FindTask(id)
 
 	giftItem, err := abc.GetGiftDetail(job.GetAttrString("product_id"))

@@ -1,6 +1,5 @@
 package config
 
-//
 var TaskList = map[string]map[string]string {
 	"abcGift": {
 		"scriptName": "abc",
