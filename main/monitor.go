@@ -9,19 +9,18 @@ import (
 	"bank.explorer/util/dates"
 	"bank.explorer/model"
 	"strings"
+	"bank.explorer/exception"
+	"bank.explorer/service"
 )
 
-const LockCODE  = "RUN:MONITOR:BANK"
-
 func main() {
-	if !common.Lock(LockCODE) {
-		fmt.Println(LockCODE + " is running...")
+	service.ConfigInit()
+
+	if !common.Lock() {
 		os.Exit(0)
 	}
-	defer func() {
-		common.UnLock(LockCODE)
-		os.Exit(0)
-	}()
+	defer common.UnLock()
+	defer exception.Handle(true)
 
 	startTime := dates.NowTime()
 	status := 0

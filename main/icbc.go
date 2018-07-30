@@ -2,19 +2,21 @@ package main
 
 import (
 	"bank.explorer/service/icbc"
-	"flag"
 	"bank.explorer/util/dates"
 	"bank.explorer/common"
 	"strconv"
 	"bank.explorer/model"
+	"bank.explorer/config"
+	"bank.explorer/exception"
+	"bank.explorer/service"
 )
 
 func main()  {
-	var ids string
-	flag.StringVar(&ids, "l", "", "job")
-	flag.Parse()
+	service.ConfigInit()
 
-	id ,_ := strconv.Atoi(ids)
+	defer exception.Handle(true)
+
+	id ,_ := strconv.Atoi(config.JobList)
 	job := model.FindTask(id)
 
 	actId := job.GetAttrString("product_id")

@@ -5,7 +5,6 @@ import (
 	"path/filepath"
 	"strings"
 	"bank.explorer/util/dates"
-	"runtime"
 	"time"
 	"bank.explorer/config"
 )
@@ -135,7 +134,7 @@ func GetAllFileByDirSuffix(dir string, suffix string) []string {
 
 func GetSysDirSuffix() string {
 	suffix := "/"
-	if "windows" == runtime.GOOS {
+	if IsWindows() {
 		suffix = "\\"
 	}
 

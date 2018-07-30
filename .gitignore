@@ -15,4 +15,4 @@
 .idea
 
 # project
-config/config.go
+config/db.go
