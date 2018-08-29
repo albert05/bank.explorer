@@ -37,9 +37,11 @@ func main() {
 
 	giftItem.SetSession(job.GetAttrString("code"))
 
+	isChooseCard := job.GetAttrString("is_kdb_pay")
+
 	i := 0
 	for i < 3 {
-		giftRep := giftItem.RunGift()
+		giftRep := giftItem.RunGift(isChooseCard)
 
 		status := 3
 		if abc.GiftStatusSUCCESS != giftRep.Status {
