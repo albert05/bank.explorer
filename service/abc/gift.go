@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"bank.explorer/util/https"
+	"bank.explorer/util/logger"
 )
 
 const GiftListURL = "https://enjoy.abchina.com/yh-web/rights/list"
@@ -74,7 +75,8 @@ func (this *GiftItem) RunGift(isChooseCard string) giftResponse {
 	}
 
 	json.Unmarshal(body, &result)
-	fmt.Println(string(body))
+	logger.Info(string(body))
+	result.Result = string(body)
 
 	return result
 }

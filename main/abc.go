@@ -15,6 +15,7 @@ import (
 	"bank.explorer/config"
 	"bank.explorer/exception"
 	"bank.explorer/service"
+	"bank.explorer/util/logger"
 )
 
 func main() {
@@ -23,6 +24,9 @@ func main() {
 
 	id ,_ := strconv.Atoi(config.JobList)
 	job := model.FindTask(id)
+
+	logger.Info(fmt.Sprintf("taskId:[%d] is starting", id))
+	defer logger.Info(fmt.Sprintf("taskId:[%d] is end", id))
 
 	giftItem, err := abc.GetGiftDetail(job.GetAttrString("product_id"))
 	if err != nil {
@@ -52,6 +56,10 @@ func main() {
 			"status": fmt.Sprintf("%d", status),
 			"result": giftRep.Result,
 		})
+
+		if status == 3 {
+			break
+		}
 		dates.SleepSecond(5)
 		i++
 	}

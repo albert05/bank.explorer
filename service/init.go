@@ -4,6 +4,7 @@ import (
 	"flag"
 	"bank.explorer/config"
 	"bank.explorer/common"
+	"bank.explorer/util/logger"
 )
 
 func ConfigInit() {
@@ -17,4 +18,9 @@ func ConfigInit() {
 		panic("GetLocalIp Err:" + err.Error())
 	}
 	config.LocalIp = localIp
+
+	// log init
+	logger.SetConsole(false)
+	logger.SetLevel(logger.INFO)
+	logger.SetRollingDaily(common.GetLogPath())
 }
