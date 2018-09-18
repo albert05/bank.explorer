@@ -75,7 +75,7 @@ func Wait(timePoint float64) {
 	}
 }
 
-func GetCmdStr(jobType string, extArr map[string]string) string {
+func GetCmdStr(jobType int, extArr map[string]string) string {
 	params := fmt.Sprintf(config.TaskList[jobType]["params"], extArr["ids"])
 	return 	fmt.Sprintf("cd %s;./%s %s", extArr["curDir"], config.TaskList[jobType]["scriptName"], params)
 }

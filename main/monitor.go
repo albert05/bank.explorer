@@ -11,6 +11,7 @@ import (
 	"bank.explorer/exception"
 	"bank.explorer/service"
 	"bank.explorer/util/logger"
+	"strconv"
 )
 
 func main() {
@@ -23,7 +24,7 @@ func main() {
 
 	startTime := dates.NowTime()
 	status := 0
-	workId := `"icbcGift","abcGift"`
+	workId := strconv.Itoa(model.WorkABC) + "," + strconv.Itoa(model.WorkICBC)
 	currentDir := common.GetPwd()
 
 	n := dates.NowTime()
@@ -31,11 +32,11 @@ func main() {
 		list := model.FindTaskListByStatus(status, workId)
 
 		now := dates.NowDateStr()
-		taskList := make(map[string][]string)
+		taskList := make(map[int][]string)
 		for _, task := range list {
 			runTime := task.GetAttrString("run_time")
 			if runTime <= now {
-				workId := task.GetAttrString("work_id")
+				workId := task.GetAttrInt("work_id")
 				if len(taskList[workId]) <= 0 {
 					taskList[workId] = make([]string, 0)
 				}

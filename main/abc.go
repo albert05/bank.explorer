@@ -39,9 +39,9 @@ func main() {
 
 	common.Wait(job.GetAttrFloat("time_point"))
 
-	giftItem.SetSession(job.GetAttrString("code"))
+	giftItem.SetSession(job.GetAttrString("user_key"))
 
-	isChooseCard := job.GetAttrString("is_kdb_pay")
+	isChooseCard := job.GetAttrString("is_card")
 
 	i := 0
 	for i < 3 {

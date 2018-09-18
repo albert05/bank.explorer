@@ -20,7 +20,7 @@ func main()  {
 	job := model.FindTask(id)
 
 	actId := job.GetAttrString("product_id")
-	cookie := job.GetAttrString("code")
+	cookie := job.GetAttrString("user_key")
 
 	common.Wait(job.GetAttrFloat("time_point"))
 	gift := icbc.InitG(cookie, actId)

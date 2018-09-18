@@ -1,11 +1,11 @@
 package config
 
-var TaskList = map[string]map[string]string {
-	"abcGift": {
+var TaskList = map[int]map[string]string {
+	1: {
 		"scriptName": "abc",
 		"params": " -l %s ",
 	},
-	"icbcGift": {
+	2: {
 		"scriptName": "icbc",
 		"params": " -l %s ",
 	},

@@ -6,7 +6,9 @@ import (
 	"strings"
 )
 
-const TaskTable  = "tasks"
+const TaskTable  = "banktasks"
+const WorkABC  = 1
+const WorkICBC  = 2
 
 func FindTask(id int) mysql.MapModel {
 	sql := fmt.Sprintf("SELECT * FROM %s WHERE id =%d", TaskTable, id)
