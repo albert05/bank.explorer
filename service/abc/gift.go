@@ -76,7 +76,7 @@ func (this *GiftItem) RunGift(isChooseCard string) giftResponse {
 
 	json.Unmarshal(body, &result)
 	logger.Info(string(body))
-	result.Result = string(body)
+	result.Result = string(body) + url
 
 	return result
 }
