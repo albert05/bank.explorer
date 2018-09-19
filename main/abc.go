@@ -41,11 +41,9 @@ func main() {
 
 	giftItem.SetSession(job.GetAttrString("user_key"))
 
-	isChooseCard := job.GetAttrString("is_card")
-
 	i := 0
 	for i < 3 {
-		giftRep := giftItem.RunGift(isChooseCard)
+		giftRep := giftItem.RunGift()
 
 		status := 3
 		if abc.GiftStatusSUCCESS != giftRep.Status {

@@ -62,9 +62,9 @@ func (this *GiftItem) SetSession(session string) {
 	this.SessionId = fmt.Sprintf(SessionID, session)
 }
 
-func (this *GiftItem) RunGift(isChooseCard string) giftResponse {
+func (this *GiftItem) RunGift() giftResponse {
 	url := GiftURL
-	if  isChooseCard == "1" {
+	if  this.ActType != "E" {
 		url = CardGiftURL
 	}
 	var result giftResponse
