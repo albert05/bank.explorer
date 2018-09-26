@@ -42,7 +42,7 @@ func main() {
 	giftItem.SetSession(job.GetAttrString("user_key"))
 
 	i := 0
-	for i < 3 {
+	for i < 50 {
 		giftRep := giftItem.RunGift()
 
 		status := 3
