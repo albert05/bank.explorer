@@ -7,7 +7,6 @@ package main
 import (
 	"fmt"
 	"bank.explorer/common"
-	"log"
 	"bank.explorer/util/dates"
 	"bank.explorer/service/abc"
 	"bank.explorer/model"
@@ -16,6 +15,7 @@ import (
 	"bank.explorer/exception"
 	"bank.explorer/service"
 	"bank.explorer/util/logger"
+	"log"
 )
 
 func main() {
@@ -28,21 +28,42 @@ func main() {
 	logger.Info(fmt.Sprintf("taskId:[%d] is starting", id))
 	defer logger.Info(fmt.Sprintf("taskId:[%d] is end", id))
 
-	giftItem, err := abc.GetGiftDetail(job.GetAttrString("product_id"))
+	data := job.GetAttrString("extra")
+	pId := job.GetAttrString("product_id")
+
+	var giftItem abc.GiftItem
+	var err error
+	if data != "" {
+		giftItem, err = abc.SetItem(pId, data)
+	}
+
 	if err != nil {
-		model.UpdateTask(job.GetAttrInt("id"), map[string]string {
-			"status": "2",
-			"result": err.Error(),
-		})
-		log.Fatal(err)
+		i := 0
+		for i < 100 {
+			giftItem, err = abc.GetGiftDetail(pId)
+			if err == nil {
+				break
+			}
+
+			dates.SleepSecond(5)
+			i++
+
+			if i >= 100 {
+				model.UpdateTask(job.GetAttrInt("id"), map[string]string{
+					"status": "2",
+					"result": err.Error(),
+				})
+				log.Fatal(err)
+			}
+		}
 	}
 
 	common.Wait(job.GetAttrFloat("time_point"))
 
 	giftItem.SetSession(job.GetAttrString("user_key"))
 
-	i := 0
-	for i < 1000 {
+	j := 0
+	for j < 100 {
 		giftRep := giftItem.RunGift()
 
 		status := 3
@@ -59,6 +80,6 @@ func main() {
 			break
 		}
 		dates.SleepSecond(5)
-		i++
+		j++
 	}
 }

@@ -58,6 +58,17 @@ func GetGiftDetail(ruleNo string) (GiftItem, error) {
 	return GiftItem{}, errors.New("gift list get failed")
 }
 
+func SetItem(ruleNo string, data string) (GiftItem, error) {
+	var item GiftItem
+	json.Unmarshal([]byte(data), &item)
+
+	if (ruleNo == item.RuleNo) {
+		return item, nil
+	}
+
+	return GiftItem{}, errors.New("gift list get failed")
+}
+
 func (this *GiftItem) SetSession(session string) {
 	this.SessionId = fmt.Sprintf(SessionID, session)
 }
