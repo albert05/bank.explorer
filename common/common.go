@@ -12,6 +12,7 @@ import (
 	"runtime"
 	"strings"
 	"regexp"
+	"bank.explorer/util/logger"
 )
 
 const DefaultSleepTIME = time.Millisecond * 10
@@ -66,7 +67,7 @@ func Exec(cmdStr string) (string, error) {
 
 func Wait(timePoint float64) {
 	currTime := dates.TimeInt2float(dates.CurrentMicro())
-	fmt.Println(currTime, timePoint)
+	logger.Info(currTime, timePoint)
 
 	for currTime < timePoint {
 		time.Sleep(DefaultSleepTIME)
