@@ -65,6 +65,7 @@ func main() {
 	j := 0
 	for j < 100 {
 		giftRep := giftItem.RunGift()
+		logger.Info(fmt.Sprintf("taskId:[%d] is try result:[%s]", id, giftRep.Result))
 
 		status := 3
 		if abc.GiftStatusSUCCESS != giftRep.Status {
